@@ -1,34 +1,114 @@
-body {
-  font-family: Georgia, serif;
-  background-color: #f4f4f4;
-  color: #222;
-  margin: 0;
-  padding: 20px;
+/* ========== VARIABLES ========== */
+:root {
+  --fondo: #f6f6f3;
+  --tinta: #1d1d1d;
+  --tinta-suave: #5a5a56;
+  --acento: #9b1c1c;
+  --linea: #d9d8d2;
+  --fuente: 'Newsreader', Georgia, 'Times New Roman', serif;
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--fuente);
+  font-size: 1.2rem;
+  line-height: 1.75;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* Todo el contenido se centra en una columna legible */
+header, main, footer {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* ========== ENCABEZADO ========== */
 h1 {
-  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
 }
 
 nav {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  margin-top: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--linea);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
 }
 
 nav a {
+  color: var(--tinta-suave);
   text-decoration: none;
-  color: #222;
-  margin: 0 8px;
+  font-size: 1.05rem;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
 }
 
-nav a:hover {
-  text-decoration: underline;
+nav a:hover { color: var(--tinta); }
+
+/* Enlace de la sección que se está leyendo */
+nav a[aria-current="page"] {
+  color: var(--acento);
+  border-bottom-color: var(--acento);
 }
 
-section {
-  max-width: 750px;
-  margin: 30px auto;
-  line-height: 1.7;
-  text-align: justify;
+a:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 4px;
+}
+
+/* ========== ESCRITOS ========== */
+main { margin-top: 2.5rem; }
+
+.escrito[hidden] { display: none; }
+
+.escrito h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.escrito p + p { margin-top: 1.25rem; }
+
+.escrito {
+  animation: aparecer 0.35s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Texto que aún no se ha escrito */
+.pendiente {
+  color: var(--tinta-suave);
+  font-style: italic;
+}
+
+/* ========== PIE ========== */
+footer {
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .escrito { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+@media (max-width: 600px) {
+  body { font-size: 1.1rem; padding: 1.5rem 1.1rem 3rem; }
 }
